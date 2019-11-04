@@ -87,7 +87,7 @@ Apify.main(async () => {
                     prep: $('[itemprop=prepTime]').text(),
                     cook: $('[itemprop=cookTime]').text(),
                     'ready in': $('[itemprop=totalTime]').text(),
-                    calories: ('[itemprop=calories]').text().split(' ')[0],
+                    calories: $('[itemprop=calories]').text().split(' ')[0],
                     '#debug': Apify.utils.createRequestDebugInfo(request),
                 };
 
