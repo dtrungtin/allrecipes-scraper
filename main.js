@@ -74,9 +74,10 @@ Apify.main(async () => {
                 const directionList = [];
 
                 for (let index = 0; index < directions.length; index++) {
-                    directionList.push($(directions[index]).text().trim()
+                    const text = $(directions[index]).text().trim()
                         .split('\n')
-                        .join(''));
+                        .join('');
+                    directionList.push(`${index + 1}. ${text}`);
                 }
 
                 const pageResult = {
@@ -85,7 +86,7 @@ Apify.main(async () => {
                     rating: $('meta[itemprop=ratingValue]').attr('content'),
                     ratingcount: $('meta[itemprop=reviewCount]').attr('content'),
                     ingredients: ingredientList.join(', '),
-                    directions: directionList.join(', '),
+                    directions: directionList.join(' '),
                     prep: $('[itemprop=prepTime]').text(),
                     cook: $('[itemprop=cookTime]').text(),
                     'ready in': $('[itemprop=totalTime]').text(),
