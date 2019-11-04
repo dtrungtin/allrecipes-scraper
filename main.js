@@ -74,7 +74,9 @@ Apify.main(async () => {
                 const directionList = [];
 
                 for (let index = 0; index < directions.length; index++) {
-                    directionList.push($(directions[index]).text());
+                    directionList.push($(directions[index]).text().trim()
+                        .split('\n')
+                        .join(''));
                 }
 
                 const pageResult = {
