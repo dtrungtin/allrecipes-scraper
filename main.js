@@ -34,7 +34,11 @@ Apify.main(async () => {
         const startUrl = input.startUrls[index].url;
 
         if (startUrl.includes('https://www.allrecipes.com/')) {
-            await requestQueue.addRequest({ url: input.startUrls[index].url, userData: { label: 'list' } });
+            if (startUrl.includes('/recipe/')) {
+                await requestQueue.addRequest({ url: input.startUrls[index].url, userData: { label: 'item' } });
+            } else {
+                await requestQueue.addRequest({ url: input.startUrls[index].url, userData: { label: 'list' } });
+            }
         }
     }
 
@@ -77,7 +81,10 @@ Apify.main(async () => {
                     const text = $(directions[index]).text().trim()
                         .split('\n')
                         .join('');
-                    directionList.push(`${index + 1}. ${text}`);
+
+                    if (text !== '') {
+                        directionList.push(`${index + 1}. ${text}`);
+                    }
                 }
 
                 const pageResult = {
