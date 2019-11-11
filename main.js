@@ -114,9 +114,7 @@ Apify.main(async () => {
                     _.extend(pageResult, userResult);
                 }
 
-                if (pagesOutputted < input.maxItems) {
-                    await Apify.pushData(pageResult);
-                }
+                await Apify.pushData(pageResult);
 
                 if (++pagesOutputted >= input.maxItems) {
                     const msg = `Outputted ${pagesOutputted} pages, limit is ${input.maxItems} pages`;
