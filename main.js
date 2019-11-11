@@ -131,7 +131,7 @@ Apify.main(async () => {
             });
         },
 
-        proxyConfiguration: input.proxyConfiguration,
+        ...input.proxyConfiguration,
     });
 
     await crawler.run();
