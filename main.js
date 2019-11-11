@@ -2,6 +2,12 @@ const Apify = require('apify');
 const _ = require('underscore');
 const safeEval = require('safe-eval');
 
+function delay(time) {
+    return new Promise(((resolve) => {
+        setTimeout(resolve, time);
+    }));
+}
+
 Apify.main(async () => {
     const input = await Apify.getInput();
     console.log('Input:');
@@ -51,6 +57,8 @@ Apify.main(async () => {
         maxConcurrency: 5,
 
         handlePageFunction: async ({ request, autoscaledPool, $ }) => {
+            await delay(500);
+
             if (request.userData.label === 'list') {
                 const itemLinks = $('.fixed-recipe-card > .fixed-recipe-card__info > a');
                 if (itemLinks.length === 0) {
