@@ -57,6 +57,8 @@ Apify.main(async () => {
         maxConcurrency: 5,
 
         handlePageFunction: async ({ request, autoscaledPool, $ }) => {
+            await delay(1000);
+
             if (request.userData.label === 'list') {
                 const itemLinks = $('.fixed-recipe-card > .fixed-recipe-card__info > a');
                 if (itemLinks.length === 0) {
